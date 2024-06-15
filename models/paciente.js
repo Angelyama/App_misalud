@@ -1,21 +1,38 @@
-// models/paciente.js
+"use strict";
+const { Model } = require("sequelize");
 module.exports = (sequelize, DataTypes) => {
-  const Paciente = sequelize.define('Paciente', {
-    nombre: DataTypes.STRING,
-    apellidos: DataTypes.STRING,
-    fecha_nacimiento: DataTypes.DATE,
-    sexo: DataTypes.STRING,
-    contacto_emergencia_nombre: DataTypes.STRING,
-    contacto_emergencia_telefono: DataTypes.STRING,
-  }, {});
-
-  Paciente.associate = function(models) {
-    Paciente.hasMany(models.Sintoma, { foreignKey: 'ID_Paciente' });
-    Paciente.hasMany(models.AdministracionMedicamento, { foreignKey: 'ID_Paciente' });
-    Paciente.hasMany(models.HistorialMedico, { foreignKey: 'ID_Paciente' });
-    Paciente.hasMany(models.Enfermedad, { foreignKey: 'ID_Paciente' });
-    Paciente.hasMany(models.NotificacionMedicamento, { foreignKey: 'ID_Paciente' });
-  };
-
+  class Paciente extends Model {
+    /**
+     * Helper method for defining associations.
+     * This method is not a part of Sequelize lifecycle.
+     * The `models/index` file will call this method automatically.
+     */
+    static associate(models) {
+      // define association here
+      Paciente.hasOne(models.HistorialMedico, { foreignKey: "paciente_id" });
+      Paciente.hasMany(models.Sintomas, { foreignKey: "paciente_id" });
+      Paciente.hasMany(models.Enfermedad, { foreignKey: "paciente_id" });
+      Paciente.hasMany(models.AdministracionMedicamentos, {
+        foreignKey: "paciente_id",
+      });
+      Paciente.hasMany(models.NotificacionMedicamentos, {
+        foreignKey: "paciente_id",
+      });
+    }
+  }
+  Paciente.init(
+    {
+      nombre: DataTypes.STRING,
+      apellido: DataTypes.STRING,
+      fecha_nacimiento: DataTypes.DATE,
+      sexo: DataTypes.STRING,
+      contacto_emergencia_nombre: DataTypes.STRING,
+      contacto_emergencia_telefono: DataTypes.INTEGER,
+    },
+    {
+      sequelize,
+      modelName: "Paciente",
+    }
+  );
   return Paciente;
 };
