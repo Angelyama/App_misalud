@@ -2,21 +2,30 @@
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
   async up(queryInterface, Sequelize) {
-    await queryInterface.createTable('Notificacion', {
+    await queryInterface.createTable('Pacientes', {
       id: {
         allowNull: false,
         autoIncrement: true,
         primaryKey: true,
         type: Sequelize.INTEGER
       },
-      mensaje: {
-        type: Sequelize.TEXT
+      nombre: {
+        type: Sequelize.STRING
       },
-      fecha_envio: {
+      apellido: {
+        type: Sequelize.STRING
+      },
+      fecha_nacimiento: {
         type: Sequelize.DATE
       },
-      tipo_notificacion: {
+      sexo: {
         type: Sequelize.STRING
+      },
+      contacto_emergencia_nombre: {
+        type: Sequelize.STRING
+      },
+      contacto_emergencia_telefono: {
+        type: Sequelize.INTEGER
       },
       createdAt: {
         allowNull: false,
@@ -29,6 +38,6 @@ module.exports = {
     });
   },
   async down(queryInterface, Sequelize) {
-    await queryInterface.dropTable('Notificaciones');
+    await queryInterface.dropTable('Pacientes');
   }
 };

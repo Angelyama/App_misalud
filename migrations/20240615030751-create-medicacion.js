@@ -1,48 +1,47 @@
-'use strict';
+"use strict";
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
   async up(queryInterface, Sequelize) {
-    await queryInterface.createTable('Sintomas', {
-      sintoma_id: {
+    await queryInterface.createTable("Medicacions", {
+      id: {
         allowNull: false,
         autoIncrement: true,
         primaryKey: true,
-        type: Sequelize.INTEGER
+        type: Sequelize.INTEGER,
       },
       usuario_id: {
         type: Sequelize.INTEGER,
         allowNull: false,
         references: {
-          model: 'Usuarios',
-          key: 'id'
+          model: "Usuarios",
+          key: "id",
         },
-        onUpdate: 'CASCADE',
-        onDelete: 'CASCADE'
+        onDelete: "CASCADE",
+        onUpdate: "CASCADE",
       },
-      descripcion: {
-        type: Sequelize.TEXT
+      nombre: {
+        type: Sequelize.STRING,
       },
-      severidad: {
-        type: Sequelize.INTEGER
+      dosis: {
+        type: Sequelize.STRING,
       },
-      duracion: {
-        type: Sequelize.INTEGER
+      hora: {
+        type: Sequelize.DATE,
       },
       fecha_registro: {
         type: Sequelize.DATE,
-        defaultValue: Sequelize.NOW
       },
       createdAt: {
         allowNull: false,
-        type: Sequelize.DATE
+        type: Sequelize.DATE,
       },
       updatedAt: {
         allowNull: false,
-        type: Sequelize.DATE
-      }
+        type: Sequelize.DATE,
+      },
     });
   },
   async down(queryInterface, Sequelize) {
-    await queryInterface.dropTable('Sintomas');
-  }
+    await queryInterface.dropTable("Medicacions");
+  },
 };

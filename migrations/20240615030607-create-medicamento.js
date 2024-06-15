@@ -2,24 +2,21 @@
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
   async up(queryInterface, Sequelize) {
-    await queryInterface.createTable('HabitosSaluds', {
+    await queryInterface.createTable('Medicamentos', {
       id: {
         allowNull: false,
         autoIncrement: true,
         primaryKey: true,
         type: Sequelize.INTEGER
       },
-      tipo_habito: {
+      nombre: {
         type: Sequelize.STRING
       },
-      descripcion: {
-        type: Sequelize.TEXT
+      dosis: {
+        type: Sequelize.STRING
       },
-      duracion: {
-        type: Sequelize.INTEGER
-      },
-      fecha_registro: {
-        type: Sequelize.DATE
+      frecuencia: {
+        type: Sequelize.STRING
       },
       createdAt: {
         allowNull: false,
@@ -32,6 +29,6 @@ module.exports = {
     });
   },
   async down(queryInterface, Sequelize) {
-    await queryInterface.dropTable('HabitosSaluds');
+    await queryInterface.dropTable('Medicamentos');
   }
 };

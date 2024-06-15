@@ -2,27 +2,27 @@
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
   async up(queryInterface, Sequelize) {
-    await queryInterface.createTable('Recordatorios', {
+    await queryInterface.createTable('Usuarios', {
       id: {
         allowNull: false,
         autoIncrement: true,
         primaryKey: true,
         type: Sequelize.INTEGER
       },
-      tipo_recordatorio: {
+      nombre: {
         type: Sequelize.STRING
       },
-      descripcion: {
-        type: Sequelize.TEXT
-      },
-      frecuencia: {
+      correo: {
         type: Sequelize.STRING
       },
-      hora: {
-        type: Sequelize.DATE
+      password_hash: {
+        type: Sequelize.STRING
       },
-      activo: {
+      verificado: {
         type: Sequelize.BOOLEAN
+      },
+      ultima_sesion: {
+        type: Sequelize.DATE
       },
       createdAt: {
         allowNull: false,
@@ -35,6 +35,6 @@ module.exports = {
     });
   },
   async down(queryInterface, Sequelize) {
-    await queryInterface.dropTable('Recordatorios');
+    await queryInterface.dropTable('Usuarios');
   }
 };
