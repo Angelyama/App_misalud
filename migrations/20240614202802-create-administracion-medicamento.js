@@ -2,17 +2,37 @@
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
   async up(queryInterface, Sequelize) {
-    await queryInterface.createTable('AdministraciónMedicamentos', {
-      id: {
+    await queryInterface.createTable('Administracion_Medicamento', {
+      ID_Administracion: {
         allowNull: false,
         autoIncrement: true,
         primaryKey: true,
         type: Sequelize.INTEGER
       },
-      fecha_hora: {
+      ID_Paciente: {
+        type: Sequelize.INTEGER,
+        allowNull: true,
+        references: {
+          model: 'Paciente',
+          key: 'ID_Paciente'
+        },
+        onUpdate: 'CASCADE',
+        onDelete: 'SET NULL'
+      },
+      ID_Medicamento: {
+        type: Sequelize.INTEGER,
+        allowNull: false,
+        references: {
+          model: 'Medicamento',
+          key: 'ID_Medicamento'
+        },
+        onUpdate: 'CASCADE',
+        onDelete: 'CASCADE'
+      },
+      Fecha_Hora: {
         type: Sequelize.DATE
       },
-      comentarios: {
+      Comentarios: {
         type: Sequelize.TEXT
       },
       createdAt: {
@@ -26,6 +46,6 @@ module.exports = {
     });
   },
   async down(queryInterface, Sequelize) {
-    await queryInterface.dropTable('AdministraciónMedicamentos');
+    await queryInterface.dropTable('Administracion_Medicamento');
   }
 };
